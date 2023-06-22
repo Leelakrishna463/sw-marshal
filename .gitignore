@@ -1,0 +1,5 @@
+venv/*
+LICENSE
+.env.*
+*.pyc
+__pycache__
