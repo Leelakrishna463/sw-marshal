@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&l0u*orm3kng-!xu_o%%qy$c6m*0@m5--w6j@mdd4ncz#*anau'
+SECRET_KEY = ENV_VAR['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = ENV_VAR['DEBUG']
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions'
+    'django_extensions',
+    'rest_framework',
+    'pass_vault',
 ]
 
 MIDDLEWARE = [
@@ -83,13 +85,6 @@ DATABASES = {
         "USER": ENV_VAR['DB_PG_USERNAME'],
         "PASSWORD": ENV_VAR['DB_PG_PASSWORD'],
         "HOST": ENV_VAR['DB_PG_HOST']
-    },
-    'pass_vault': {
-        "NAME": ENV_VAR['DB_PASS_VAULT_NAME'],
-        "ENGINE": "django.db.backends.postgresql",
-        "USER": ENV_VAR['DB_PG_USERNAME'],
-        "PASSWORD": ENV_VAR['DB_PG_PASSWORD'],
-        "HOST": ENV_VAR['DB_PG_HOST']
     }
 }
 
@@ -129,6 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
